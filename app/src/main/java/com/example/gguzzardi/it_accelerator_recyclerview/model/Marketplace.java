@@ -25,11 +25,25 @@ public class Marketplace {
     }
 
     private Item createRandomItem(String name) {
+        Random rand = new Random();
         Item item = new Item();
         item.setName(name);
         item.setDescription("Descripcion de item de ejemplo");
+        item.setPrice(getRandomPrice());
 
-        Random rand = new Random();
+        if (rand.nextInt(2) == 1) {
+            item.setDiscount(10);
+        } else {
+            item.setDiscount(0);
+        }
+
         return item;
+    }
+
+    private double getRandomPrice() {
+        Random rand = new Random();
+        double rangeMin = 5.0;
+        double rangeMax = 5000.0;
+        return rangeMin + (rangeMax - rangeMin) * rand.nextDouble();
     }
 }
