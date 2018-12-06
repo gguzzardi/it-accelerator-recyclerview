@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.gguzzardi.it_accelerator_recyclerview.R;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.Marketplace;
+import com.example.gguzzardi.it_accelerator_recyclerview.model.mocks.MockedMarketplace;
 import com.example.gguzzardi.it_accelerator_recyclerview.presenters.MarketplacePresenter;
 import com.example.gguzzardi.it_accelerator_recyclerview.views.interfaces.MarketplaceItemsView;
 import com.example.gguzzardi.it_accelerator_recyclerview.views.recyclerviews.adapters.MarketplaceItemsAdapter;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mMarketplacePresenter = new MarketplacePresenter(this, new Marketplace());
+        mMarketplacePresenter = new MarketplacePresenter(this, new MockedMarketplace());
 
         setupRecyclerView();
     }

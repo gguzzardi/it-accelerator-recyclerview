@@ -72,7 +72,7 @@ public class MarketplaceItemsAdapter extends RecyclerView.Adapter<MarketplaceIte
         if (item.getDiscount() <= 0) {
             viewHolder.itemDiscount.setVisibility(View.GONE);
         } else {
-            String discount = String.format("%d OFF", item.getDiscount());
+            String discount = String.format("%d%% OFF", item.getDiscount());
             viewHolder.itemDiscount.setText(discount);
         }
         viewHolder.itemDescription.setText(item.getDescription());
