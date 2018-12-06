@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Mostrador de Items</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="action_login">Login</string>
+</resources>
