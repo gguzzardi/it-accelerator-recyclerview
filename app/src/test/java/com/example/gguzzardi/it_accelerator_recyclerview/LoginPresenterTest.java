@@ -1,6 +1,6 @@
 package com.example.gguzzardi.it_accelerator_recyclerview;
 
-import com.example.gguzzardi.it_accelerator_recyclerview.model.User;
+import com.example.gguzzardi.it_accelerator_recyclerview.model.UserLoginData;
 import com.example.gguzzardi.it_accelerator_recyclerview.presenters.LoginPresenter;
 
 import org.junit.Before;
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.verify;
 public class LoginPresenterTest {
 
     @Mock
-    private User mMockedUser;
+    private UserLoginData mMockedUser;
 
     private LoginPresenter mLoginPresenter;
 

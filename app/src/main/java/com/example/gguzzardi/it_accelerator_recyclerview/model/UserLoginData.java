@@ -1,14 +1,9 @@
 package com.example.gguzzardi.it_accelerator_recyclerview.model;
 
-public class User {
+public class UserLoginData {
 
     private String mEmail;
     private String mPassword;
-
-    public User(String email, String password) {
-        mEmail = email;
-        mPassword = password;
-    }
 
     public void setEmail(String email) {
         this.mEmail = email;

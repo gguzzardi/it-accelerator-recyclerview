@@ -9,6 +9,7 @@
     android:paddingRight="24dp">
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputLayout_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/login_fields_margin"
@@ -23,6 +24,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputLayout_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/login_fields_margin"

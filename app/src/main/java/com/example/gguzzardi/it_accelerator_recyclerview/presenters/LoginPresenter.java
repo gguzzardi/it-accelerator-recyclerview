@@ -1,20 +1,20 @@
 package com.example.gguzzardi.it_accelerator_recyclerview.presenters;
 
-import com.example.gguzzardi.it_accelerator_recyclerview.model.User;
+import com.example.gguzzardi.it_accelerator_recyclerview.model.UserLoginData;
 
 public class LoginPresenter {
 
-    private final User mUser;
+    private UserLoginData mUserLoginData;
 
-    public LoginPresenter(User user) {
-        mUser = user;
+    public LoginPresenter(UserLoginData userLoginData) {
+        mUserLoginData = userLoginData;
     }
 
     public void updateEmail(String email) {
-        mUser.setEmail(email);
+        mUserLoginData.setEmail(email);
     }
 
     public void updatePassword(String password) {
-        mUser.setPassword(password);
+        mUserLoginData.setPassword(password);
     }
 }
