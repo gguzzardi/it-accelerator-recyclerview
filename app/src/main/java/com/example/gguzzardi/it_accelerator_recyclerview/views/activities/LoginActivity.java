@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
         mEmailInputLayout.setErrorEnabled(false);
+        mLoginPresenter.updateEmail(email);
         return true;
     }
 
@@ -82,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
         mPasswordInputLayout.setErrorEnabled(false);
+        mLoginPresenter.updatePassword(password);
         return true;
     }
 }
