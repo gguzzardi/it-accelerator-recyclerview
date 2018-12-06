@@ -4,7 +4,7 @@ import com.example.gguzzardi.it_accelerator_recyclerview.model.UserLoginData;
 
 public class LoginPresenter {
 
-    private UserLoginData mUserLoginData;
+    private final UserLoginData mUserLoginData;
 
     public LoginPresenter(UserLoginData userLoginData) {
         mUserLoginData = userLoginData;
