@@ -17,7 +17,7 @@ public class MarketplacePresenter implements MarketplaceItemsAdapter.Marketplace
         mMarketplace = marketplace;
     }
 
-    public List<Item> getMarketplaceItems() {
+    public List<Item> loadMarketplaceItems() {
         return mMarketplace.getItems();
     }
 

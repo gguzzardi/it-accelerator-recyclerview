@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="@dimen/margin_top_itemview_price"
             android:layout_marginBottom="8dp"
             android:text="$434"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
@@ -44,7 +44,7 @@
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_item"
-            app:layout_constraintVertical_bias="0.25" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/tv_item_discount"
@@ -52,16 +52,19 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="@dimen/margin_top_itemview_price"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             android:text="10% OFF"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/colorAccent"
-            android:textSize="10sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tv_item_price"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/tv_item_price" />
+            app:layout_constraintStart_toEndOf="@+id/tv_item_price"
+            app:layout_constraintTop_toBottomOf="@+id/image_item" />
 
         <TextView
             android:id="@+id/tv_description"

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.example.gguzzardi.it_accelerator_recyclerview.R;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.UserLoginData;
@@ -18,6 +19,8 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout mPasswordInputLayout;
     private EditText mEmailEditText;
     private EditText mPasswordEditText;
+    private Button mLoginButton;
+    private ProgressBar mProgressBar;
 
     private LoginPresenter mLoginPresenter;
 
@@ -31,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordInputLayout = findViewById(R.id.inputLayout_password);
         mEmailEditText = findViewById(R.id.input_email);
         mPasswordEditText = findViewById(R.id.input_password);
+        mLoginButton = findViewById(R.id.btn_login);
+        mProgressBar = findViewById(R.id.pb_login);
 
         mLoginPresenter = new LoginPresenter(new UserLoginData());
 
@@ -38,13 +43,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setupLoginButton() {
-        final Button loginButton = findViewById(R.id.btn_login);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (validateUser()) {
-                    openMainActivity();
-                }
+        mLoginButton.setOnClickListener(v -> {
+            showProgressBar();
+            if (validateUser()) {
+                // hideProgressBar();
+                openMainActivity();
             }
         });
     }
@@ -86,4 +89,15 @@ public class LoginActivity extends AppCompatActivity {
         mLoginPresenter.updatePassword(password);
         return true;
     }
+
+    private void showProgressBar() {
+        mLoginButton.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        mLoginButton.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.GONE);
+    }
+
 }

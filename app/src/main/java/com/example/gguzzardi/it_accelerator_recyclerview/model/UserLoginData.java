@@ -12,4 +12,5 @@ public class UserLoginData {
     public void setPassword(String password) {
         this.mPassword = password;
     }
+    
 }

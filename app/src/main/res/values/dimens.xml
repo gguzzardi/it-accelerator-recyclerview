@@ -1,3 +1,4 @@
 <resources>
     <dimen name="login_fields_margin">8dp</dimen>
+    <dimen name="margin_top_itemview_price">12dp</dimen>
 </resources>
