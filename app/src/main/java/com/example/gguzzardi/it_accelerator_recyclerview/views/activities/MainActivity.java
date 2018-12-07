@@ -1,5 +1,6 @@
 package com.example.gguzzardi.it_accelerator_recyclerview.views.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,8 +41,6 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
     private void setupRecyclerView() {
         RecyclerView itemsRecyclerView = findViewById(R.id.rv_marketplace);
 
-        itemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         StaggeredGridLayoutManager gridLayoutManager =
                 new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         itemsRecyclerView.setLayoutManager(gridLayoutManager);
@@ -57,8 +56,10 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
     }
 
     @Override
-    public void onItemClicked() {
-        Toast.makeText(this, "Item clicked", Toast.LENGTH_SHORT).show();
+    public void onItemClicked(String itemId) {
+        Intent openItemDetailsActivityIntent = new Intent(this, ItemDetailsActivity.class);
+        openItemDetailsActivityIntent.putExtra(ItemDetailsActivity.EXTRA_ITEM_ID, itemId);
+        startActivity(openItemDetailsActivityIntent);
     }
 
     private void showProgressBar() {

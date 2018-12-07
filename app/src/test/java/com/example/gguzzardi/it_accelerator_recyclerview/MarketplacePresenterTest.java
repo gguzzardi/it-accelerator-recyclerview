@@ -1,5 +1,7 @@
 package com.example.gguzzardi.it_accelerator_recyclerview;
 
+import com.example.gguzzardi.it_accelerator_recyclerview.apis.MercadoLibreApi;
+import com.example.gguzzardi.it_accelerator_recyclerview.apis.MercadolibreService;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.Marketplace;
 import com.example.gguzzardi.it_accelerator_recyclerview.presenters.MarketplacePresenter;
 import com.example.gguzzardi.it_accelerator_recyclerview.views.interfaces.MarketplaceItemsView;
@@ -12,6 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MarketplacePresenterTest {
@@ -22,6 +25,9 @@ public class MarketplacePresenterTest {
     @Mock
     private MarketplaceItemsView mMockedView;
 
+    @Mock
+    private MercadolibreService mMeliService;
+
     private MarketplacePresenter mMarketplacePresenter;
 
     @Before
@@ -31,13 +37,13 @@ public class MarketplacePresenterTest {
 
     @Test
     public void onItemClickedCallsViewIOnItemClickedMethod() {
-        mMarketplacePresenter.onItemClicked();
-        verify(mMockedView, times(1)).onItemClicked();
+        mMarketplacePresenter.onItemClicked("1");
+        verify(mMockedView, times(1)).onItemClicked("1");
     }
 
     @Test
-    public void loadItemsListCallsMarketplaceGetItemsMethod() {
-        mMarketplacePresenter.loadMarketplace("celulares");
+    public void getItemsListCallsMarketplaceGetItemsMethod() {
+        mMarketplacePresenter.getItems();
         verify(mMockedMarketplace, times(1)).getItems();
     }
 }

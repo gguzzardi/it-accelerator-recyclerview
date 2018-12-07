@@ -49,7 +49,7 @@ public class MarketplacePresenter implements MarketplaceItemsAdapter.Marketplace
     }
 
     @Override
-    public void onItemClicked() {
-        mMarketplaceView.onItemClicked();
+    public void onItemClicked(String itemId) {
+        mMarketplaceView.onItemClicked(itemId);
     }
 }
