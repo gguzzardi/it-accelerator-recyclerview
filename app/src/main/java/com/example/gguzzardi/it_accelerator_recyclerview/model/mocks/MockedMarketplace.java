@@ -27,17 +27,21 @@ public class MockedMarketplace extends Marketplace {
     private Item createRandomItem(String name) {
         Random rand = new Random();
         Item item = new Item();
-        item.setName(name);
+        item.setTitle(name);
         item.setDescription("Descripcion de item de ejemplo");
         item.setPrice(getRandomPrice());
-        item.setImagePath("https://frescolib.org/static/images/docs/01-scaletypes-sample-1.png");
+
+        if (rand.nextInt(2) == 1) {
+            item.setImagePath("https://frescolib.org/static/images/docs/01-scaletypes-sample-1.png");
+        } else {
+            item.setImagePath("https://frescolib.org/static/images/docs/01-scaletypes-sample-2.png");
+        }
 
         if (rand.nextInt(2) == 1) {
             item.setDiscount(10);
         } else {
             item.setDiscount(0);
         }
-
         return item;
     }
 

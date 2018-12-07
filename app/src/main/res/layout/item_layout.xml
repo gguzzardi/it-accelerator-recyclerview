@@ -27,8 +27,10 @@
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintVertical_chainStyle="spread"
             fresco:actualImageScaleType="focusCrop"
+            fresco:placeholderImageScaleType="focusCrop"
             fresco:placeholderImage="@mipmap/ic_launcher"
-            fresco:roundingBorderWidth="4dp" />
+            fresco:backgroundImage="@color/color_image_background"
+            />
 
         <TextView
             android:id="@+id/tv_item_price"

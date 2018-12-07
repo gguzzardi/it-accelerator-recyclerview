@@ -1,11 +1,34 @@
 package com.example.gguzzardi.it_accelerator_recyclerview.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Item {
+
+    @SerializedName("id")
+    private Long mId;
+
+    @SerializedName("imagePath")
     private String mImagePath;
-    private String mName;
-    private double mPrice;
-    private int mDiscount;
+
+    @SerializedName("title")
+    private String mTitle;
+
+    @SerializedName("price")
+    private Double mPrice;
+
+    @SerializedName("discount")
+    private Integer mDiscount;
+
+    @SerializedName("description")
     private String mDescription;
+
+    public long getId() {
+        return mId;
+    }
+
+    public void setId(long id) {
+        mId = id;
+    }
 
     public String getImagePath() {
         return mImagePath;
@@ -15,12 +38,12 @@ public class Item {
         mImagePath = imagePath;
     }
 
-    public String getName() {
-        return mName;
+    public String getTitle() {
+        return mTitle;
     }
 
-    public void setName(String name) {
-        mName = name;
+    public void setTitle(String title) {
+        mTitle = title;
     }
 
     public double getPrice() {
