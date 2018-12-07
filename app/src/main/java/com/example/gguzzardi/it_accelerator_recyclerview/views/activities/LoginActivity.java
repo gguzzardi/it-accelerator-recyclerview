@@ -45,6 +45,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
         mLoginPresenter = new LoginPresenter(this, new UserLoginData());
 
+        hideProgressBar();
+
         setupLoginButton();
     }
 

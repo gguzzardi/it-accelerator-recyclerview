@@ -4,16 +4,17 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MercadoLibreApi {
-    private static Retrofit sRetrofit;
-    private static final String BASE_URL = "https://api.mercadolibre.com/";
+    private static MercadolibreService sMercadoLibreService;
+    private static final String BASE_URL = "https://api.mercadolibre.com";
 
-    public static Retrofit getApi() {
-        if (sRetrofit == null) {
-            sRetrofit = new retrofit2.Retrofit.Builder()
+    public static MercadolibreService getApi() {
+        if (sMercadoLibreService == null) {
+            Retrofit retrofit = new retrofit2.Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
+            sMercadoLibreService = retrofit.create(MercadolibreService.class);
         }
-        return sRetrofit;
+        return sMercadoLibreService;
     }
 }

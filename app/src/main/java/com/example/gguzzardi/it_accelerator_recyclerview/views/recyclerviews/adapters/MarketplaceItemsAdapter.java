@@ -78,7 +78,7 @@ public class MarketplaceItemsAdapter extends RecyclerView.Adapter<MarketplaceIte
             String discount = String.format("%d%% OFF", item.getDiscount());
             viewHolder.itemDiscount.setText(discount);
         }
-        viewHolder.itemDescription.setText(item.getDescription());
+        viewHolder.itemDescription.setText(item.getTitle());
     }
 
     @Override

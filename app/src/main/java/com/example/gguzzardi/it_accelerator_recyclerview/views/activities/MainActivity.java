@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.gguzzardi.it_accelerator_recyclerview.R;
-import com.example.gguzzardi.it_accelerator_recyclerview.model.mocks.MockedMarketplace;
+import com.example.gguzzardi.it_accelerator_recyclerview.model.Marketplace;
 import com.example.gguzzardi.it_accelerator_recyclerview.presenters.MarketplacePresenter;
 import com.example.gguzzardi.it_accelerator_recyclerview.views.interfaces.MarketplaceItemsView;
 import com.example.gguzzardi.it_accelerator_recyclerview.views.recyclerviews.adapters.MarketplaceItemsAdapter;
@@ -31,16 +31,15 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
 
         mProgressBar = findViewById(R.id.pb_items);
         mRecyclerView = findViewById(R.id.rv_marketplace);
-        mMarketplacePresenter = new MarketplacePresenter(this, new MockedMarketplace());
+        mMarketplacePresenter = new MarketplacePresenter(this, new Marketplace());
 
         setupRecyclerView();
+        loadItems();
     }
 
     private void setupRecyclerView() {
         RecyclerView itemsRecyclerView = findViewById(R.id.rv_marketplace);
 
-        MarketplaceItemsAdapter adapter = new MarketplaceItemsAdapter(mMarketplacePresenter.loadMarketplaceItems(), mMarketplacePresenter);
-        itemsRecyclerView.setAdapter(adapter);
         itemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         StaggeredGridLayoutManager gridLayoutManager =
@@ -50,6 +49,11 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
         itemsRecyclerView.setItemAnimator(new SlideInUpAnimator());
 
         itemsRecyclerView.setHasFixedSize(true);
+    }
+
+    private void loadItems() {
+        showProgressBar();
+        mMarketplacePresenter.loadMarketplace("Celulares");
     }
 
     @Override
@@ -65,5 +69,18 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
     private void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
         mRecyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onLoadItemsSuccess() {
+        RecyclerView itemsRecyclerView = findViewById(R.id.rv_marketplace);
+        MarketplaceItemsAdapter adapter = new MarketplaceItemsAdapter(mMarketplacePresenter.getItems(), mMarketplacePresenter);
+        itemsRecyclerView.setAdapter(adapter);
+        hideProgressBar();
+    }
+
+    @Override
+    public void onLoadItemsError() {
+        hideProgressBar();
     }
 }

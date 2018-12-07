@@ -37,7 +37,7 @@ public class MarketplacePresenterTest {
 
     @Test
     public void loadItemsListCallsMarketplaceGetItemsMethod() {
-        mMarketplacePresenter.loadMarketplaceItems();
+        mMarketplacePresenter.loadMarketplace("celulares");
         verify(mMockedMarketplace, times(1)).getItems();
     }
 }

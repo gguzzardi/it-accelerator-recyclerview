@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 public class Item {
 
     @SerializedName("id")
-    private Long mId;
+    private String mId;
 
-    @SerializedName("imagePath")
+    @SerializedName("thumbnail")
     private String mImagePath;
 
     @SerializedName("title")
@@ -16,17 +16,15 @@ public class Item {
     @SerializedName("price")
     private Double mPrice;
 
-    @SerializedName("discount")
-    private Integer mDiscount;
+    private Integer mDiscount = 0;
 
-    @SerializedName("description")
     private String mDescription;
 
-    public long getId() {
+    public String getId() {
         return mId;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         mId = id;
     }
 
