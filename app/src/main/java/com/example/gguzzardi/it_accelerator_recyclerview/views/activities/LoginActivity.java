@@ -8,12 +8,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.gguzzardi.it_accelerator_recyclerview.R;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.UserLoginData;
+import com.example.gguzzardi.it_accelerator_recyclerview.model.events.UserLoginEvent;
 import com.example.gguzzardi.it_accelerator_recyclerview.presenters.LoginPresenter;
+import com.example.gguzzardi.it_accelerator_recyclerview.views.interfaces.LoginView;
 
-public class LoginActivity extends AppCompatActivity {
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+public class LoginActivity extends AppCompatActivity implements LoginView {
 
     private TextInputLayout mEmailInputLayout;
     private TextInputLayout mPasswordInputLayout;
@@ -23,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
 
     private LoginPresenter mLoginPresenter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +43,27 @@ public class LoginActivity extends AppCompatActivity {
         mLoginButton = findViewById(R.id.btn_login);
         mProgressBar = findViewById(R.id.pb_login);
 
-        mLoginPresenter = new LoginPresenter(new UserLoginData());
+        mLoginPresenter = new LoginPresenter(this, new UserLoginData());
 
         setupLoginButton();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     private void setupLoginButton() {
         mLoginButton.setOnClickListener(v -> {
             showProgressBar();
-            if (validateUser()) {
-                // hideProgressBar();
-                openMainActivity();
-            }
+            attemptToLogin();
         });
     }
 
@@ -57,37 +72,13 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(openMainActivityIntent);
     }
 
-    private boolean validateUser() {
-        boolean emailValid = validateEmail();
-        boolean passwordValid = validatePassword();
-        return emailValid && passwordValid;
-    }
-
-    private boolean validateEmail() {
+    private void attemptToLogin() {
         String email = mEmailEditText.getText().toString();
-        if (email.isEmpty()) {
-            String field = getResources().getString(R.string.hint_email);
-            String message = String.format(getResources().getString(R.string.error_empty_field), field);
-            mEmailInputLayout.setError(message);
-            return false;
-        }
-        mEmailInputLayout.setErrorEnabled(false);
-        mLoginPresenter.updateEmail(email);
-        return true;
-    }
-
-
-    private boolean validatePassword() {
         String password = mPasswordEditText.getText().toString();
-        if (password.isEmpty()) {
-            String field = getResources().getString(R.string.hint_password);
-            String message = String.format(getResources().getString(R.string.error_empty_field), field);
-            mPasswordInputLayout.setError(message);
-            return false;
-        }
-        mPasswordInputLayout.setErrorEnabled(false);
+
+        mLoginPresenter.updateEmail(email);
         mLoginPresenter.updatePassword(password);
-        return true;
+        mLoginPresenter.login();
     }
 
     private void showProgressBar() {
@@ -100,4 +91,18 @@ public class LoginActivity extends AppCompatActivity {
         mProgressBar.setVisibility(View.GONE);
     }
 
+    @Override
+    public void onLoginSuccess() {
+        openMainActivity();
+    }
+
+    @Override
+    public void onLoginError() {
+        Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUserLogin(UserLoginEvent event) {
+        Toast.makeText(this, "User has successfully login", Toast.LENGTH_SHORT).show();
+    }
 }

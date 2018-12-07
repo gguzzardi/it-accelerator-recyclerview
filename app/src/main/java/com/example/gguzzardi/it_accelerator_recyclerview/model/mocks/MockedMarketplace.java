@@ -30,6 +30,7 @@ public class MockedMarketplace extends Marketplace {
         item.setName(name);
         item.setDescription("Descripcion de item de ejemplo");
         item.setPrice(getRandomPrice());
+        item.setImagePath("https://frescolib.org/static/images/docs/01-scaletypes-sample-1.png");
 
         if (rand.nextInt(2) == 1) {
             item.setDiscount(10);

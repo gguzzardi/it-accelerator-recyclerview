@@ -12,5 +12,19 @@ public class UserLoginData {
     public void setPassword(String password) {
         this.mPassword = password;
     }
-    
+
+    public boolean validate() {
+        boolean validEmail = validateEmail();
+        boolean validPassword = validatePassword();
+        return validEmail && validPassword;
+    }
+
+    private boolean validateEmail() {
+        return !mEmail.isEmpty();
+    }
+
+    private boolean validatePassword() {
+        return !mPassword.isEmpty();
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.example.gguzzardi.it_accelerator_recyclerview.views.recyclerviews.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.gguzzardi.it_accelerator_recyclerview.R;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.Item;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class MarketplaceItemsAdapter extends RecyclerView.Adapter<MarketplaceIte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public CardView itemCardview;
-        public ImageView itemImage;
+        public SimpleDraweeView itemImage;
         public TextView itemPrice;
         public TextView itemDiscount;
         public TextView itemDescription;
@@ -64,7 +66,8 @@ public class MarketplaceItemsAdapter extends RecyclerView.Adapter<MarketplaceIte
 
         viewHolder.itemCardview.setOnClickListener( v -> mListener.onItemClicked());
 
-        // viewHolder.itemImage.setImageDrawable();
+        Uri uri = Uri.parse(item.getImagePath());
+        viewHolder.itemImage.setImageURI(uri);
 
         String priceString = String.format("$%.2f", item.getPrice());
         viewHolder.itemPrice.setText(priceString);

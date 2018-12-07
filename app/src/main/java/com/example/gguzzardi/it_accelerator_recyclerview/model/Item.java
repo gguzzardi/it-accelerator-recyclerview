@@ -1,20 +1,18 @@
 package com.example.gguzzardi.it_accelerator_recyclerview.model;
 
-import android.graphics.drawable.Drawable;
-
 public class Item {
-    private Drawable mImage;
+    private String mImagePath;
     private String mName;
     private double mPrice;
     private int mDiscount;
     private String mDescription;
 
-    public Drawable getImage() {
-        return mImage;
+    public String getImagePath() {
+        return mImagePath;
     }
 
-    public void setImage(Drawable image) {
-        mImage = image;
+    public void setImagePath(String imagePath) {
+        mImagePath = imagePath;
     }
 
     public String getName() {
