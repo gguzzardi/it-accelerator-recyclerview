@@ -13,7 +13,10 @@ import com.example.gguzzardi.it_accelerator_recyclerview.R;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.Item;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class MarketplaceItemsAdapter extends RecyclerView.Adapter<MarketplaceItemsAdapter.ViewHolder> {
 
@@ -69,7 +72,10 @@ public class MarketplaceItemsAdapter extends RecyclerView.Adapter<MarketplaceIte
         Uri uri = Uri.parse(item.getImagePath());
         viewHolder.itemImage.setImageURI(uri);
 
-        String priceString = String.format("$%.2f", item.getPrice());
+        NumberFormat formatter = new DecimalFormat("#,###.00");
+        String formattedPrice = formatter.format(item.getPrice());
+
+        String priceString = String.format("$ %s", formattedPrice);
         viewHolder.itemPrice.setText(priceString);
 
         if (item.getDiscount() <= 0) {

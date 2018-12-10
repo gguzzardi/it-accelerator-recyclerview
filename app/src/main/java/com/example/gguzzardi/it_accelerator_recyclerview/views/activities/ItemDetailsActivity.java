@@ -26,6 +26,8 @@ import com.example.gguzzardi.it_accelerator_recyclerview.views.interfaces.ItemDe
 import com.example.gguzzardi.it_accelerator_recyclerview.views.recyclerviews.adapters.PicturesAdapter;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
@@ -142,15 +144,17 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
         discountView.setVisibility(View.VISIBLE);
         itemBasePrice.setVisibility(View.VISIBLE);
         itemBasePrice.setPaintFlags(itemBasePrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        itemBasePrice.setText(String.format("$ %.2f", basePrice));
+        NumberFormat formatter = new DecimalFormat("#,###.00");
+        itemBasePrice.setText(String.format("$ %s", formatter.format(basePrice)));
 
         int discountAmount = (int) (100 - (actualPrice * 100 / basePrice));
         discountView.setText(String.format("%d%% OFF", discountAmount));
     }
 
     private void updateItemPrice(Double price) {
+        NumberFormat formatter = new DecimalFormat("#,###.00");
         final TextView itemActualPrice = findViewById(R.id.tv_actual_price);
-        itemActualPrice.setText(String.format("$ %.2f", price));
+        itemActualPrice.setText(String.format("$ %s", formatter.format(price)));
     }
 
     private void setupBuyButton(String linkToMeli) {

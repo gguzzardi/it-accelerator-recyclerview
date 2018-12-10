@@ -12,6 +12,7 @@ import android.widget.SearchView;
 
 import com.example.gguzzardi.it_accelerator_recyclerview.R;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.Marketplace;
+import com.example.gguzzardi.it_accelerator_recyclerview.preferenes.MeliPreferences;
 import com.example.gguzzardi.it_accelerator_recyclerview.presenters.MarketplacePresenter;
 import com.example.gguzzardi.it_accelerator_recyclerview.views.interfaces.MarketplaceItemsView;
 import com.example.gguzzardi.it_accelerator_recyclerview.views.recyclerviews.adapters.MarketplaceItemsAdapter;
@@ -38,7 +39,13 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
 
         setupRecyclerView();
         setupSearchView();
-        loadItems("Celulares");
+
+        String initialQuery = MeliPreferences.getInstance(this).
+                    getString(MeliPreferences.Key.LAST_QUERY, "Celulares");
+        mSearchView.setQuery(initialQuery, false);
+        mSearchView.clearFocus();
+
+        loadItems(initialQuery);
     }
 
     private void setupRecyclerView() {
@@ -54,12 +61,7 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
     }
 
     private void setupSearchView() {
-        mSearchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSearchView.setIconified(false);
-            }
-        });
+        mSearchView.setOnClickListener(v -> mSearchView.setIconified(false));
 
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
 
             @Override
             public boolean onQueryTextSubmit(String query) {
+                saveQueryToPreferences();
                 loadItems(query);
                 return true;
             }
@@ -78,6 +81,11 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
     private void loadItems(String searchQuery) {
         showProgressBar();
         mMarketplacePresenter.loadMarketplace(searchQuery);
+    }
+
+    private void saveQueryToPreferences() {
+        String queryValue = mSearchView.getQuery().toString();
+        MeliPreferences.getInstance(this).put(MeliPreferences.Key.LAST_QUERY, queryValue);
     }
 
     @Override
@@ -103,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
     public void onLoadItemsSuccess() {
         RecyclerView itemsRecyclerView = findViewById(R.id.rv_marketplace);
         MarketplaceItemsAdapter adapter = new MarketplaceItemsAdapter(mMarketplacePresenter.getItems(), mMarketplacePresenter);
-        itemsRecyclerView.setAdapter(adapter);
+        itemsRecyclerView.swapAdapter(adapter, false);
         hideProgressBar();
     }
 
