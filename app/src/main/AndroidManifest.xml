@@ -20,7 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.activities.MainActivity" />
+        <activity
+            android:name=".views.activities.MainActivity"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".views.activities.ItemDetailsActivity"
             android:label="@string/title_activity_item_details"

@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 
 import com.example.gguzzardi.it_accelerator_recyclerview.R;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.Marketplace;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
 
     private ProgressBar mProgressBar;
     private RecyclerView mRecyclerView;
+    private SearchView mSearchView;
 
     private MarketplacePresenter mMarketplacePresenter;
 
@@ -30,10 +33,12 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
 
         mProgressBar = findViewById(R.id.pb_items);
         mRecyclerView = findViewById(R.id.rv_marketplace);
+        mSearchView = findViewById(R.id.search_marketplace);
         mMarketplacePresenter = new MarketplacePresenter(this, new Marketplace());
 
         setupRecyclerView();
-        loadItems();
+        setupSearchView();
+        loadItems("Celulares");
     }
 
     private void setupRecyclerView() {
@@ -48,9 +53,31 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
         itemsRecyclerView.setHasFixedSize(true);
     }
 
-    private void loadItems() {
+    private void setupSearchView() {
+        mSearchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSearchView.setIconified(false);
+            }
+        });
+
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                loadItems(query);
+                return true;
+            }
+        });
+    }
+
+    private void loadItems(String searchQuery) {
         showProgressBar();
-        mMarketplacePresenter.loadMarketplace("Celulares");
+        mMarketplacePresenter.loadMarketplace(searchQuery);
     }
 
     @Override
@@ -62,11 +89,13 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
 
     private void showProgressBar() {
         mProgressBar.setVisibility(View.VISIBLE);
+        mSearchView.setVisibility(View.GONE);
         mRecyclerView.setVisibility(View.GONE);
     }
 
     private void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
+        mSearchView.setVisibility(View.VISIBLE);
         mRecyclerView.setVisibility(View.VISIBLE);
     }
 
