@@ -32,7 +32,7 @@ public class MarketplaceItemsAdapter extends RecyclerView.Adapter<MarketplaceIte
             super(itemView);
 
             itemCardview = itemView.findViewById(R.id.cardview_item);
-            itemImage = itemView.findViewById(R.id.image_item);
+            itemImage = itemView.findViewById(R.id.rv_item_images);
             itemPrice = itemView.findViewById(R.id.tv_item_price);
             itemDiscount = itemView.findViewById(R.id.tv_item_discount);
             itemDescription = itemView.findViewById(R.id.tv_description);

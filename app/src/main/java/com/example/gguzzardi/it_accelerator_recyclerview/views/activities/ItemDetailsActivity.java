@@ -5,9 +5,15 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,9 +23,12 @@ import com.example.gguzzardi.it_accelerator_recyclerview.model.ItemDetails;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.PictureData;
 import com.example.gguzzardi.it_accelerator_recyclerview.presenters.ItemDetailsPresenter;
 import com.example.gguzzardi.it_accelerator_recyclerview.views.interfaces.ItemDetailsView;
+import com.example.gguzzardi.it_accelerator_recyclerview.views.recyclerviews.adapters.PicturesAdapter;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
+
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 public class ItemDetailsActivity extends AppCompatActivity implements ItemDetailsView {
 
@@ -27,6 +36,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
 
     private ProgressBar mProgressBar;
     private ViewGroup mContentLayout;
+    private RecyclerView mRecyclerView;
 
     private ItemDetailsPresenter mItemDetailsPresenter;
 
@@ -37,11 +47,25 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
 
         mProgressBar = findViewById(R.id.pb_item_detail);
         mContentLayout = findViewById(R.id.layout_item_detail);
+        mRecyclerView = findViewById(R.id.rv_item_images);
 
 
         mItemDetailsPresenter = new ItemDetailsPresenter(this);
 
+        setupImagesRecyclerView();
+
         loadItemDetails();
+    }
+
+    private void setupImagesRecyclerView() {
+        mRecyclerView = findViewById(R.id.rv_item_images);
+        LinearLayoutManager layoutManager =
+                new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setItemAnimator(new SlideInUpAnimator());
+        mRecyclerView.setHasFixedSize(true);
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(mRecyclerView);
     }
 
     private void loadItemDetails() {
@@ -89,9 +113,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
     private void updateItemImages(List<PictureData> imagesData) {
         if (imagesData.isEmpty()) return;
 
-        final SimpleDraweeView image = findViewById(R.id.image_item);
-        Uri uri = Uri.parse(imagesData.get(0).getUrl());
-        image.setImageURI(uri);
+        mRecyclerView.setAdapter(new PicturesAdapter(imagesData));
     }
 
     private void updateSoldQuantity(Integer soldQuantity) {
@@ -133,12 +155,9 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
 
     private void setupBuyButton(String linkToMeli) {
         final Button button = findViewById(R.id.btn_buy_item);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkToMeli));
-                startActivity(intent);
-            }
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkToMeli));
+            startActivity(intent);
         });
     }
 }
