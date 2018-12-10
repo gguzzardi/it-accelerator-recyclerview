@@ -1,14 +1,13 @@
 package com.example.gguzzardi.it_accelerator_recyclerview.views.activities;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
@@ -23,11 +22,17 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 public class MainActivity extends AppCompatActivity implements MarketplaceItemsView {
 
+    private static final String STATE_QUERY = "search_query";
+    private static final int LANDSCAPE_COLUMNS_AMOUNT = 3;
+    private static final int PORTRAIT_COLUMNS_AMOUNT = 2;
+
     private ProgressBar mProgressBar;
     private RecyclerView mRecyclerView;
     private SearchView mSearchView;
 
     private MarketplacePresenter mMarketplacePresenter;
+
+    private String mQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,31 +47,44 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
         setupRecyclerView();
         setupSearchView();
 
-        doInitialSearch();
+        doInitialSearch(savedInstanceState);
     }
 
-    private void doInitialSearch() {
-        String query = "";
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putString(STATE_QUERY, mQuery);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    private void doInitialSearch(Bundle savedInstanceState) {
         Intent intent = getIntent();
         String action = intent.getAction();
-        if (!action.isEmpty() && action.equals(Intent.ACTION_VIEW)) {
+        if (action != null && action.equals(Intent.ACTION_VIEW)) {
             Uri data = intent.getData();
-            query = data.getLastPathSegment();
+            mQuery = data.getLastPathSegment();
+        } else if (savedInstanceState != null &&
+                   savedInstanceState.getString(STATE_QUERY, "").isEmpty() == false) {
+            mQuery = savedInstanceState.getString(STATE_QUERY);
         } else {
-            query = MeliPreferences.getInstance(this).
+            mQuery = MeliPreferences.getInstance(this).
                     getString(MeliPreferences.Key.LAST_QUERY, "Celulares");
         }
-        mSearchView.setQuery(query, false);
-        loadItems(query);
+        mSearchView.setQuery(mQuery, false);
+        loadItems(mQuery);
     }
 
     private void setupRecyclerView() {
         RecyclerView itemsRecyclerView = findViewById(R.id.rv_marketplace);
 
-        StaggeredGridLayoutManager gridLayoutManager =
-                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        itemsRecyclerView.setLayoutManager(gridLayoutManager);
+        StaggeredGridLayoutManager gridLayoutManager;
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            gridLayoutManager = new StaggeredGridLayoutManager(LANDSCAPE_COLUMNS_AMOUNT, StaggeredGridLayoutManager.VERTICAL);
+        } else {
+            gridLayoutManager = new StaggeredGridLayoutManager(PORTRAIT_COLUMNS_AMOUNT, StaggeredGridLayoutManager.VERTICAL);
+        }
 
+        itemsRecyclerView.setLayoutManager(gridLayoutManager);
         itemsRecyclerView.setItemAnimator(new SlideInUpAnimator());
 
         itemsRecyclerView.setHasFixedSize(true);
@@ -83,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
 
             @Override
             public boolean onQueryTextSubmit(String query) {
+                mQuery = query;
                 saveQueryToPreferences();
                 loadItems(query);
                 return true;

@@ -41,7 +41,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <!-- Accepts URIs that begin with "example://” -->
+                <!-- Accepts URIs that begin with "meli://search” -->
                 <data android:scheme="meli"
                     android:host="search"/>
             </intent-filter>
