@@ -22,10 +22,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".views.activities.MainActivity"
             android:label="@string/title_activity_main"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop">
+            <intent-filter android:label="@string/filter_view_http">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://www.mercadolibre.com//sites/MLA/search?q=” -->
+                <data android:scheme="http"
+                    android:host="www.mercadolibre.com"
+                    android:pathPrefix="/sites/MLA/search" />
+                <!-- note that the leading "/" is required for pathPrefix-->
+            </intent-filter>
+            <intent-filter android:label="@string/filter_view_meli">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "example://” -->
+                <data android:scheme="meli"
+                    android:host="search"/>
+            </intent-filter>
+
+
+        </activity>
+
         <activity
             android:name=".views.activities.ItemDetailsActivity"
             android:label="@string/title_activity_item_details"

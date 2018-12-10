@@ -1,10 +1,12 @@
 package com.example.gguzzardi.it_accelerator_recyclerview.views.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
@@ -40,12 +42,22 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
         setupRecyclerView();
         setupSearchView();
 
-        String initialQuery = MeliPreferences.getInstance(this).
-                    getString(MeliPreferences.Key.LAST_QUERY, "Celulares");
-        mSearchView.setQuery(initialQuery, false);
-        mSearchView.clearFocus();
+        doInitialSearch();
+    }
 
-        loadItems(initialQuery);
+    private void doInitialSearch() {
+        String query = "";
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        if (!action.isEmpty() && action.equals(Intent.ACTION_VIEW)) {
+            Uri data = intent.getData();
+            query = data.getLastPathSegment();
+        } else {
+            query = MeliPreferences.getInstance(this).
+                    getString(MeliPreferences.Key.LAST_QUERY, "Celulares");
+        }
+        mSearchView.setQuery(query, false);
+        loadItems(query);
     }
 
     private void setupRecyclerView() {
