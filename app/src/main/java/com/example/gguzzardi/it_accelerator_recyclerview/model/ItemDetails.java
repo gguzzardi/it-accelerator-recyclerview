@@ -18,11 +18,14 @@ public class ItemDetails {
     @SerializedName("price")
     private Double mPrice;
 
-    @SerializedName("base_price")
+    @SerializedName("original_price")
     private Double mBasePrice;
 
     @SerializedName("available_quantity")
     private Integer mAvailableQuantity;
+
+    @SerializedName("permalink")
+    private String mLinkToMeli;
 
     public String getId() {
         return mId;
@@ -42,6 +45,10 @@ public class ItemDetails {
 
     public Double getBasePrice() {
         return mBasePrice;
+    }
+
+    public String getLinkToMeli() {
+        return mLinkToMeli;
     }
 
     public Integer getAvailableQuantity() {

@@ -1,11 +1,13 @@
 package com.example.gguzzardi.it_accelerator_recyclerview.views.activities;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,8 +73,9 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
 
         updateItemImages(itemDetails.getItemImages());
         updateItemTitle(itemDetails.getTitle());
-        updateItemBasePrice(itemDetails.getBasePrice());
+        updateItemBasePrice(itemDetails.getBasePrice(), itemDetails.getPrice());
         updateItemPrice(itemDetails.getPrice());
+        setupBuyButton(itemDetails.getLinkToMeli());
     }
 
     @Override
@@ -95,14 +98,37 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
         itemTitle.setText(title);
     }
 
-    private void updateItemBasePrice(double basePrice) {
+    private void updateItemBasePrice(Double basePrice, Double actualPrice) {
+        final TextView discountView = findViewById(R.id.tv_discount);
         final TextView itemBasePrice = findViewById(R.id.tv_base_price);
+        if (basePrice == null || actualPrice == basePrice) {
+            itemBasePrice.setVisibility(View.GONE);
+            discountView.setVisibility(View.GONE);
+            return;
+        }
+
+        discountView.setVisibility(View.VISIBLE);
+        itemBasePrice.setVisibility(View.VISIBLE);
         itemBasePrice.setPaintFlags(itemBasePrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         itemBasePrice.setText(String.format("%.2f", basePrice));
+
+        int discountAmount = (int) (100 - (actualPrice * 100 / basePrice));
+        discountView.setText(String.format("%d%% OFF", discountAmount));
     }
 
-    private void updateItemPrice(double price) {
+    private void updateItemPrice(Double price) {
         final TextView itemActualPrice = findViewById(R.id.tv_actual_price);
         itemActualPrice.setText(String.format("%.2f", price));
+    }
+
+    private void setupBuyButton(String linkToMeli) {
+        final Button button = findViewById(R.id.btn_buy_item);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkToMeli));
+                startActivity(intent);
+            }
+        });
     }
 }
