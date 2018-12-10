@@ -72,6 +72,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
         hideProgressBar();
 
         updateItemImages(itemDetails.getItemImages());
+        updateSoldQuantity(itemDetails.getSoldQuantity());
         updateItemTitle(itemDetails.getTitle());
         updateItemBasePrice(itemDetails.getBasePrice(), itemDetails.getPrice());
         updateItemPrice(itemDetails.getPrice());
@@ -93,6 +94,15 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
         image.setImageURI(uri);
     }
 
+    private void updateSoldQuantity(Integer soldQuantity) {
+        final TextView soldQuantityView = findViewById(R.id.tv_item_sold_quantity);
+        if (soldQuantity == null || soldQuantity < 1) {
+            soldQuantityView.setVisibility(View.GONE);
+        }
+        String soldQuantityString = String.format(getResources().getString(R.string.format_vendidos), soldQuantity);
+        soldQuantityView.setText(soldQuantityString);
+    }
+
     private void updateItemTitle(String title) {
         final TextView itemTitle = findViewById(R.id.tv_item_title);
         itemTitle.setText(title);
@@ -110,7 +120,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
         discountView.setVisibility(View.VISIBLE);
         itemBasePrice.setVisibility(View.VISIBLE);
         itemBasePrice.setPaintFlags(itemBasePrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        itemBasePrice.setText(String.format("%.2f", basePrice));
+        itemBasePrice.setText(String.format("$ %.2f", basePrice));
 
         int discountAmount = (int) (100 - (actualPrice * 100 / basePrice));
         discountView.setText(String.format("%d%% OFF", discountAmount));
@@ -118,7 +128,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
 
     private void updateItemPrice(Double price) {
         final TextView itemActualPrice = findViewById(R.id.tv_actual_price);
-        itemActualPrice.setText(String.format("%.2f", price));
+        itemActualPrice.setText(String.format("$ %.2f", price));
     }
 
     private void setupBuyButton(String linkToMeli) {

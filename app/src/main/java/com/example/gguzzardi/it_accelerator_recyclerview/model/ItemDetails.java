@@ -21,6 +21,9 @@ public class ItemDetails {
     @SerializedName("original_price")
     private Double mBasePrice;
 
+    @SerializedName("sold_quantity")
+    private Integer mSoldQuantity;
+
     @SerializedName("available_quantity")
     private Integer mAvailableQuantity;
 
@@ -45,6 +48,10 @@ public class ItemDetails {
 
     public Double getBasePrice() {
         return mBasePrice;
+    }
+
+    public Integer getSoldQuantity() {
+        return mSoldQuantity;
     }
 
     public String getLinkToMeli() {

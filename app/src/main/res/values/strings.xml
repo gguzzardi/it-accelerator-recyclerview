@@ -8,6 +8,8 @@
     <string name="action_login">Login</string>
     <string name="action_comprar">Comprar</string>
 
+    <string name="format_vendidos">%d vendidos</string>
+
     <string name="error_empty_field">%s cannot be empty</string>
     <string name="error_loading_item">Error loading item</string>
 </resources>
