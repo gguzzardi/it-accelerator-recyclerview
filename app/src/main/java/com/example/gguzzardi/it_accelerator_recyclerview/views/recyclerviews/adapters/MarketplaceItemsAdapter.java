@@ -36,6 +36,7 @@ public class MarketplaceItemsAdapter extends RecyclerView.Adapter<MarketplaceIte
             itemPrice = itemView.findViewById(R.id.tv_item_price);
             itemDiscount = itemView.findViewById(R.id.tv_item_discount);
             itemDescription = itemView.findViewById(R.id.tv_description);
+
         }
     }
 

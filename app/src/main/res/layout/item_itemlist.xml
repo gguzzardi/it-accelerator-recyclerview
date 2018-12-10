@@ -26,10 +26,11 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintVertical_chainStyle="spread"
+            app:roundedCornerRadius="8dp"
             fresco:actualImageScaleType="centerCrop"
             fresco:backgroundImage="@color/color_image_background"
-            fresco:placeholderImage="@mipmap/ic_launcher"
-            fresco:placeholderImageScaleType="centerCrop" />
+            fresco:placeholderImage="@drawable/progress_animation"
+            fresco:placeholderImageScaleType="centerInside" />
 
         <TextView
             android:id="@+id/tv_item_price"

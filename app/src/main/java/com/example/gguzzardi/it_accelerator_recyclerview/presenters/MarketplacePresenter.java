@@ -1,7 +1,6 @@
 package com.example.gguzzardi.it_accelerator_recyclerview.presenters;
 
 import com.example.gguzzardi.it_accelerator_recyclerview.apis.MercadoLibreApi;
-import com.example.gguzzardi.it_accelerator_recyclerview.apis.MercadolibreService;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.Item;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.ItemList;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.Marketplace;

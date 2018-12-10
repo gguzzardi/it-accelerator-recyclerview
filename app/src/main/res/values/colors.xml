@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="color_image_background">#efefef</color>
+    <color name="color_buy_button">#2d6bd0</color>
 </resources>

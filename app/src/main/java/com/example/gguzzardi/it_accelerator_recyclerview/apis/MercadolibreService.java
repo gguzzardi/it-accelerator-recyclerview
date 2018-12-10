@@ -1,6 +1,7 @@
 package com.example.gguzzardi.it_accelerator_recyclerview.apis;
 
 import com.example.gguzzardi.it_accelerator_recyclerview.model.Item;
+import com.example.gguzzardi.it_accelerator_recyclerview.model.ItemDetails;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.ItemList;
 
 import retrofit2.Call;
@@ -14,6 +15,6 @@ public interface MercadolibreService {
     Call<ItemList> getItemsByQuery(@Query("q") String query);
 
     @GET("items/{id}")
-    Call<Item> getItemById(@Path("id") Long id);
+    Call<ItemDetails> getItemDetailsById(@Path("id") String id);
 
 }

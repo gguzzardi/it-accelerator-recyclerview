@@ -100,7 +100,20 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void onLoginError() {
-        Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+        String email = mEmailEditText.getText().toString();
+        String password = mPasswordEditText.getText().toString();
+
+        if (email.isEmpty()) {
+            mEmailInputLayout.setError(String.format(getResources().getString(R.string.error_empty_field), "Email"));
+        } else {
+            mEmailInputLayout.setErrorEnabled(false);
+        }
+        if (password.isEmpty()) {
+            mPasswordInputLayout.setError(String.format(getResources().getString(R.string.error_empty_field), "Password"));
+        } else {
+            mPasswordInputLayout.setErrorEnabled(false);
+        }
+        hideProgressBar();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
