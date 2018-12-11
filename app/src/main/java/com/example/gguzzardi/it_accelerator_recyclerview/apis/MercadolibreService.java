@@ -1,6 +1,5 @@
 package com.example.gguzzardi.it_accelerator_recyclerview.apis;
 
-import com.example.gguzzardi.it_accelerator_recyclerview.model.Item;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.ItemDetails;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.ItemList;
 

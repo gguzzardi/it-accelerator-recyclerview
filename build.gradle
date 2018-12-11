@@ -5,6 +5,11 @@ buildscript {
     repositories {
         google()
         jcenter()
+
+        maven { url 'http://maven-mobile.melicloud.com/nexus/content/repositories/releases' }
+        flatDir {
+            dirs 'aars'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'

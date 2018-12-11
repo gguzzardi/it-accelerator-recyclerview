@@ -34,8 +34,4 @@ public class MeliPreferences {
         return mPreferences.getString(key.name(), defaultValue);
     }
 
-    public boolean contains(Key key) {
-        return mPreferences.contains(key.name());
-    }
-
 }

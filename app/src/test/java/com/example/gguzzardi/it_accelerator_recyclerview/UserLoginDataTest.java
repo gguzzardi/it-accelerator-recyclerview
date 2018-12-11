@@ -23,7 +23,7 @@ public class UserLoginDataTest {
     }
 
     @Test
-    public void validateFailsWithEmpty() {
+    public void validateFailsWithEmptyEmail() {
         mLoginData.setPassword("123");
         mLoginData.setEmail("");
         Assert.assertTrue(!mLoginData.validate());

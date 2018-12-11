@@ -1,7 +1,5 @@
 package com.example.gguzzardi.it_accelerator_recyclerview.model;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
 import java.util.List;
 

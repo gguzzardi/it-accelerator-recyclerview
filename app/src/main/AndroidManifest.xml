@@ -42,7 +42,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Accepts URIs that begin with "meli://search” -->
-                <data android:scheme="meli"
+                <data android:scheme="ml"
                     android:host="search"/>
             </intent-filter>
 

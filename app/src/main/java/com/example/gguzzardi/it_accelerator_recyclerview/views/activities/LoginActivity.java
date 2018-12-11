@@ -15,6 +15,8 @@ import com.example.gguzzardi.it_accelerator_recyclerview.model.UserLoginData;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.events.UserLoginEvent;
 import com.example.gguzzardi.it_accelerator_recyclerview.presenters.LoginPresenter;
 import com.example.gguzzardi.it_accelerator_recyclerview.views.interfaces.LoginView;
+import com.mercadolibre.android.ui.widgets.MeliSnackbar;
+import com.mercadolibre.android.ui.widgets.MeliSpinner;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -22,12 +24,15 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
 
+    private static final String STATE_EMAIL = "state_email";
+    private static final String STATE_PASSWORD = "state_password";
+
     private TextInputLayout mEmailInputLayout;
     private TextInputLayout mPasswordInputLayout;
     private EditText mEmailEditText;
     private EditText mPasswordEditText;
     private Button mLoginButton;
-    private ProgressBar mProgressBar;
+    private MeliSpinner mProgressBar;
 
     private LoginPresenter mLoginPresenter;
 
@@ -48,6 +53,18 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         hideProgressBar();
 
         setupLoginButton();
+
+        if (savedInstanceState != null) {
+            mEmailEditText.setText(savedInstanceState.getString(STATE_EMAIL, ""));
+            mPasswordEditText.setText(savedInstanceState.getString(STATE_PASSWORD, ""));
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString(STATE_EMAIL, mEmailEditText.getText().toString());
+        outState.putString(STATE_PASSWORD, mPasswordEditText.getText().toString());
+        super.onSaveInstanceState(outState);
     }
 
     @Override

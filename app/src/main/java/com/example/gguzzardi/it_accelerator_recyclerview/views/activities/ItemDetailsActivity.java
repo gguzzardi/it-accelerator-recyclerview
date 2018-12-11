@@ -25,6 +25,7 @@ import com.example.gguzzardi.it_accelerator_recyclerview.presenters.ItemDetailsP
 import com.example.gguzzardi.it_accelerator_recyclerview.views.interfaces.ItemDetailsView;
 import com.example.gguzzardi.it_accelerator_recyclerview.views.recyclerviews.adapters.PicturesAdapter;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.mercadolibre.android.ui.widgets.MeliSpinner;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -36,7 +37,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
 
     public static final String EXTRA_ITEM_ID = "extra_item_id";
 
-    private ProgressBar mProgressBar;
+    private MeliSpinner mProgressBar;
     private ViewGroup mContentLayout;
     private RecyclerView mRecyclerView;
 

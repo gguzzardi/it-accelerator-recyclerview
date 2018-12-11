@@ -17,6 +17,7 @@ import com.example.gguzzardi.it_accelerator_recyclerview.preferenes.MeliPreferen
 import com.example.gguzzardi.it_accelerator_recyclerview.presenters.MarketplacePresenter;
 import com.example.gguzzardi.it_accelerator_recyclerview.views.interfaces.MarketplaceItemsView;
 import com.example.gguzzardi.it_accelerator_recyclerview.views.recyclerviews.adapters.MarketplaceItemsAdapter;
+import com.mercadolibre.android.ui.widgets.MeliSpinner;
 
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements MarketplaceItemsV
     private static final int LANDSCAPE_COLUMNS_AMOUNT = 3;
     private static final int PORTRAIT_COLUMNS_AMOUNT = 2;
 
-    private ProgressBar mProgressBar;
+    private MeliSpinner mProgressBar;
     private RecyclerView mRecyclerView;
     private SearchView mSearchView;
 

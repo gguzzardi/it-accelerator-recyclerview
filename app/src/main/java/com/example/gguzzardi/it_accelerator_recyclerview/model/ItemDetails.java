@@ -15,6 +15,9 @@ public class ItemDetails {
     @SerializedName("title")
     private String mTitle;
 
+    @SerializedName("seller_id")
+    private String mSellerId;
+
     @SerializedName("price")
     private Double mPrice;
 
@@ -58,7 +61,4 @@ public class ItemDetails {
         return mLinkToMeli;
     }
 
-    public Integer getAvailableQuantity() {
-        return mAvailableQuantity;
-    }
 }

@@ -9,9 +9,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ProgressBar
+    <com.mercadolibre.android.ui.widgets.MeliSpinner
         android:id="@+id/pb_item_detail"
         style="?android:attr/progressBarStyle"
+        app:size="large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -93,11 +94,11 @@
                 android:layout_margin="4dp"
                 android:text="50% off"
                 android:textAppearance="@style/TextAppearance.AppCompat.Tooltip"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/ui_meli_green"
                 android:textSize="18sp" />
         </LinearLayout>
 
-        <Button
+        <com.mercadolibre.android.ui.widgets.MeliButton
             android:id="@+id/btn_buy_item"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"

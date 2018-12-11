@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -25,14 +26,11 @@ public class MarketplacePresenterTest {
     @Mock
     private MarketplaceItemsView mMockedView;
 
-    @Mock
-    private MercadolibreService mMeliService;
-
     private MarketplacePresenter mMarketplacePresenter;
 
     @Before
     public void initPresenter() {
-        mMarketplacePresenter = new MarketplacePresenter(mMockedView, mMockedMarketplace);
+        mMarketplacePresenter = spy(new MarketplacePresenter(mMockedView, mMockedMarketplace));
     }
 
     @Test

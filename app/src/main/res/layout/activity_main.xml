@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ProgressBar
+    <com.mercadolibre.android.ui.widgets.MeliSpinner
         android:id="@+id/pb_items"
+        app:size="large"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
