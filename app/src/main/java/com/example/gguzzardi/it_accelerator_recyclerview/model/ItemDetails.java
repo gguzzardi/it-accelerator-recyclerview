@@ -61,4 +61,7 @@ public class ItemDetails {
         return mLinkToMeli;
     }
 
+    public String getSellerId() {
+        return mSellerId;
+    }
 }

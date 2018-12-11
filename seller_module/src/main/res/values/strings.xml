@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Datos del Vendedor</string>
+    <string name="filter_view_meli_seller">filter_seller</string>
 </resources>

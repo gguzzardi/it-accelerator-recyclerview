@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +28,7 @@ import com.example.gguzzardi.it_accelerator_recyclerview.views.recyclerviews.ada
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.mercadolibre.android.ui.widgets.MeliSpinner;
 
+import java.net.URI;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
@@ -36,6 +38,7 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 public class ItemDetailsActivity extends AppCompatActivity implements ItemDetailsView {
 
     public static final String EXTRA_ITEM_ID = "extra_item_id";
+    private static final String URI_OPEN_SELLER_DETAILS_FORMAT = "ml://vervendedor/%s";
 
     private MeliSpinner mProgressBar;
     private ViewGroup mContentLayout;
@@ -104,6 +107,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
         updateItemBasePrice(itemDetails.getBasePrice(), itemDetails.getPrice());
         updateItemPrice(itemDetails.getPrice());
         setupBuyButton(itemDetails.getLinkToMeli());
+        setupSellerDetailsButton(itemDetails.getSellerId());
     }
 
     @Override
@@ -163,6 +167,15 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
         button.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkToMeli));
             startActivity(intent);
+        });
+    }
+
+    private void setupSellerDetailsButton(String sellerId) {
+        final CardView sellerCardview = findViewById(R.id.cv_seller_details);
+        sellerCardview.setOnClickListener(v -> {
+            String url = String.format(URI_OPEN_SELLER_DETAILS_FORMAT, sellerId);
+            Intent openSellerDetailsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(openSellerDetailsIntent);
         });
     }
 }

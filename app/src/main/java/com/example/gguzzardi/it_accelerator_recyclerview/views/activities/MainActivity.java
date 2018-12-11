@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
@@ -18,6 +19,8 @@ import com.example.gguzzardi.it_accelerator_recyclerview.presenters.MarketplaceP
 import com.example.gguzzardi.it_accelerator_recyclerview.views.interfaces.MarketplaceItemsView;
 import com.example.gguzzardi.it_accelerator_recyclerview.views.recyclerviews.adapters.MarketplaceItemsAdapter;
 import com.mercadolibre.android.ui.widgets.MeliSpinner;
+
+import java.net.URI;
 
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
