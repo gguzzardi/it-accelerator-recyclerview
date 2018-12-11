@@ -17,7 +17,6 @@ import com.example.seller_module.model.Seller;
 import com.example.seller_module.presenters.SellerPresenter;
 import com.example.seller_module.views.interfaces.SellerView;
 import com.mercadolibre.android.ui.widgets.MeliSnackbar;
-import com.mercadolibre.android.ui.widgets.MeliSpinner;
 
 public class SellerActivity extends AppCompatActivity implements SellerView {
 
@@ -43,11 +42,14 @@ public class SellerActivity extends AppCompatActivity implements SellerView {
 
         mSellerPresenter = new SellerPresenter(this);
 
+        setTitle(getResources().getString(R.string.activity_seller_name));
+
         Intent intent = getIntent();
         String action = intent.getAction();
         if (action != null && action.equals(Intent.ACTION_VIEW)) {
             Uri data = intent.getData();
-            mSellerId = data.getLastPathSegment();
+            String lastSegment = data.getLastPathSegment();
+            mSellerId = lastSegment == null ? "" : lastSegment;
         } else if (savedInstanceState != null && savedInstanceState.containsKey(STATE_SELLER_ID)) {
             mSellerId = savedInstanceState.getString(STATE_SELLER_ID);
         } else {

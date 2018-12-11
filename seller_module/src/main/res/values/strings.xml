@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Datos del Vendedor</string>
+    <string name="activity_seller_name">Datos del Vendedor</string>
+
     <string name="filter_view_meli_seller">filter_seller</string>
+    <string name='action_more_details'>More details
+    </string>
 </resources>
