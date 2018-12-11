@@ -140,12 +140,9 @@ public class SellerActivity extends AppCompatActivity implements SellerView {
     }
 
     private void setUpMoreDetailsButton(final String permalink) {
-        mMoreDetailsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(permalink));
-                startActivity(intent);
-            }
+        mMoreDetailsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(permalink));
+            startActivity(intent);
         });
     }
 
@@ -153,12 +150,7 @@ public class SellerActivity extends AppCompatActivity implements SellerView {
     public void onLoadSellerInfoError() {
         hideProgressBar();
         MeliSnackbar snackBar = MeliSnackbar.make(mProgressBar, "Error de conección", 3);
-        snackBar.setAction("Reintentar", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadSellerInfo(mSellerId);
-            }
-        });
+        snackBar.setAction("Reintentar", v -> loadSellerInfo(mSellerId));
         snackBar.show();
 
     }
