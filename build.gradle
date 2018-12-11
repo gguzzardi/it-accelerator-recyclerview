@@ -20,6 +20,11 @@ buildscript {
     }
 }
 
+plugins {
+    id 'net.researchgate.release' version '2.6.0' apply false
+}
+
+
 allprojects {
     repositories {
         google()
@@ -30,3 +35,20 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+/*bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    pkg {
+        version {
+            name = '1.0.0'
+            desc = 'Basic Seller Information'
+            released  = new Date()
+        }
+        repo = 'generic'
+        name = 'gradle-project'
+        userOrg = 'bintray_user'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/gguzzardi/it-accelerator-recyclerview.git'
+    }
+}*/
