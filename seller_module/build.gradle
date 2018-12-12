@@ -106,6 +106,7 @@ bintray {
     pkg {
         repo = 'meli-seller-view'
         name = 'seller-view'
+        userOrg = 'gonzaloguzzardi'
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/gguzzardi/it-accelerator-recyclerview.git'
         version {
