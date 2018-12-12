@@ -99,8 +99,8 @@ publishing {
 }
 
 bintray {
-    user = String.valueOf(System.getenv('BINTRAY_USER'))
-    key = String.valueOf(System.getenv('BINTRAY_KEY'))
+    user = 'gonzaloguzzardi'
+    key = 'ed9af0d8e4479b433a861081c10f53c0faa35e20'
     configurations = ['archives']
     publications = ['MyPublication']
     pkg {
