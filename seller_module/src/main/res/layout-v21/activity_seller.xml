@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:elevation="4dp"
-        app:cardBackgroundColor="@color/ui_components_melidialog_tint"
+        app:cardBackgroundColor="@color/ui_meli_white"
         app:cardCornerRadius="4dp">
 
 
@@ -119,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:elevation="4dp"
-        app:cardBackgroundColor="@color/ui_components_melidialog_tint"
+        app:cardBackgroundColor="@color/ui_meli_white"
         app:cardCornerRadius="4dp">
 
 
