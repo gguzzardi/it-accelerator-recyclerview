@@ -10,12 +10,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,22 +20,25 @@ import com.example.gguzzardi.it_accelerator_recyclerview.R;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.ItemDetails;
 import com.example.gguzzardi.it_accelerator_recyclerview.model.PictureData;
 import com.example.gguzzardi.it_accelerator_recyclerview.presenters.ItemDetailsPresenter;
+import com.example.gguzzardi.it_accelerator_recyclerview.views.dialogs.ItemQuantityDialog;
 import com.example.gguzzardi.it_accelerator_recyclerview.views.interfaces.ItemDetailsView;
 import com.example.gguzzardi.it_accelerator_recyclerview.views.recyclerviews.adapters.PicturesAdapter;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.mercadolibre.android.ui.widgets.MeliDialog;
 import com.mercadolibre.android.ui.widgets.MeliSpinner;
 
-import java.net.URI;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
-public class ItemDetailsActivity extends AppCompatActivity implements ItemDetailsView {
+public class ItemDetailsActivity extends AppCompatActivity implements ItemDetailsView, ItemQuantityDialog.QuantityDialogListener {
 
+    public static final String TAG = "ItemDetailsActivity";
     public static final String EXTRA_ITEM_ID = "extra_item_id";
     private static final String URI_OPEN_SELLER_DETAILS_FORMAT = "ml://vervendedor/%s";
+
+    private static MeliDialog mSetQuantityDialog;
 
     private MeliSpinner mProgressBar;
     private ViewGroup mContentLayout;
@@ -108,6 +108,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
         updateItemPrice(itemDetails.getPrice());
         setupBuyButton(itemDetails.getLinkToMeli());
         setupSellerDetailsButton(itemDetails.getSellerId());
+        setUpQuantityView(itemDetails.getAvailableQuantity());
     }
 
     @Override
@@ -115,6 +116,21 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
         hideProgressBar();
         Toast.makeText(this,
                 getResources().getString(R.string.error_loading_item), Toast.LENGTH_SHORT).show();
+    }
+
+    private void setUpQuantityView(Integer availableQuantity) {
+        if (availableQuantity == null) return;
+
+        final CardView quantityCardview = findViewById(R.id.cv_cantidad);
+
+        quantityCardview.setOnClickListener(v -> {
+            mSetQuantityDialog = new ItemQuantityDialog();
+
+            Bundle args = new Bundle();
+            args.putInt(ItemQuantityDialog.STATE_AVAILABLE_ITEMS, availableQuantity);
+            mSetQuantityDialog.setArguments(args);
+            mSetQuantityDialog.show(getSupportFragmentManager(), TAG);
+        });
     }
 
     private void updateItemImages(List<PictureData> imagesData) {
@@ -177,5 +193,12 @@ public class ItemDetailsActivity extends AppCompatActivity implements ItemDetail
             Intent openSellerDetailsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(openSellerDetailsIntent);
         });
+    }
+
+    @Override
+    public void onQuantityClicked(int quantity) {
+        final CardView quantityCardview = findViewById(R.id.cv_cantidad);
+        final TextView quantityTextView = quantityCardview.findViewById(R.id.tv_value);
+        quantityTextView.setText(String.valueOf(quantity));
     }
 }

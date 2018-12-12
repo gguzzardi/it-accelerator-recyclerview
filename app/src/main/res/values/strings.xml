@@ -13,6 +13,7 @@
     <string name="filter_view_http">filter_http</string>
 
     <string name="format_vendidos">%d vendidos</string>
+    <string name="format_available_units">%d unidades disponibles</string>
 
     <string name="error_empty_field">%s cannot be empty</string>
     <string name="error_loading_item">Error loading item</string>

@@ -6,4 +6,8 @@
 
     <color name="color_image_background">#efefef</color>
     <color name="color_buy_button">#2d6bd0</color>
+    <color name="ui_components_melidialog_background">#f3ffdb15</color>
+    <color name="ui_components_melidialog_tint">#16140e</color>
+
+
 </resources>

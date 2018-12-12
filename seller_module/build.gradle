@@ -9,8 +9,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
-group 'com.example.seller_module'
-
 android {
     compileSdkVersion 28
 

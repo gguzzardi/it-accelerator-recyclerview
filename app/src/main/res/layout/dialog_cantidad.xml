@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ui_ripple_mask"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:gravity="center_horizontal"
+            android:text="Cantidad"
+            android:textAppearance="@style/MLFont.Regular.XXLarge" />
+
+        <TextView
+            android:id="@+id/tv_availability"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:gravity="center_horizontal"
+            android:text="@string/format_available_units"
+            android:textAppearance="@style/MLFont.Light" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_unidades_uno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:gravity="center_horizontal"
+        android:text="1 Unidad"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:textAppearance="@style/MLFont.Light.Medium" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/ui_contextual_menu_background_color"></View>
+
+    <TextView
+        android:id="@+id/tv_unidades_dos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:gravity="center_horizontal"
+        android:text="2 Unidades"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:textAppearance="@style/MLFont.Light.Medium" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/ui_contextual_menu_background_color"></View>
+
+    <TextView
+        android:id="@+id/tv_unidades_tres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:gravity="center_horizontal"
+        android:text="3 Unidades"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:textAppearance="@style/MLFont.Light.Medium" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/ui_contextual_menu_background_color"></View>
+
+    <TextView
+        android:id="@+id/tv_unidades_cuatro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:gravity="center_horizontal"
+        android:text="4 Unidades"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:textAppearance="@style/MLFont.Light.Medium" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/ui_contextual_menu_background_color"></View>
+
+    <TextView
+        android:id="@+id/tv_unidades_cinco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:gravity="center_horizontal"
+        android:text="5 Unidades"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:textAppearance="@style/MLFont.Light.Medium" />
+
+</LinearLayout>

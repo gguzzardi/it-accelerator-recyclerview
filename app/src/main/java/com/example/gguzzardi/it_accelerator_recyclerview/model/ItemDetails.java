@@ -64,4 +64,8 @@ public class ItemDetails {
     public String getSellerId() {
         return mSellerId;
     }
+
+    public Integer getAvailableQuantity() {
+        return mAvailableQuantity;
+    }
 }

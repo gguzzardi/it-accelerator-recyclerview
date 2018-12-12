@@ -98,6 +98,9 @@
                 android:textSize="18sp" />
         </LinearLayout>
 
+
+        <include layout="@layout/cv_cantidad"></include>
+
         <com.mercadolibre.android.ui.widgets.MeliButton
             android:id="@+id/btn_buy_item"
             style="@style/Widget.AppCompat.Button.Colored"

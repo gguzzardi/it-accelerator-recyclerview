@@ -10,6 +10,8 @@ buildscript {
         flatDir {
             dirs 'aars'
         }
+
+        maven { url "https://dl.bintray.com/gonzaloguzzardi/meli-seller-view" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
