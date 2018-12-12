@@ -53,7 +53,7 @@ dependencies {
 release {
     failOnCommitNeeded = true
     failOnPublishNeeded = true
-    failOnSnapshotDependencies = true
+    failOnSnapshotDependencies = false
     failOnUnversionedFiles = true
     failOnUpdateNeeded = true
     revertOnFail = true
