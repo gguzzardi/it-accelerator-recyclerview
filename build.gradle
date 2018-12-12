@@ -20,11 +20,6 @@ buildscript {
     }
 }
 
-plugins {
-    id 'net.researchgate.release' version '2.6.0' apply false
-}
-
-
 allprojects {
     repositories {
         google()

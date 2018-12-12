@@ -1,7 +1,10 @@
 import java.util.regex.Matcher
 
+plugins {
+    id 'net.researchgate.release' version '2.6.0'
+}
+
 apply plugin: 'com.android.library'
-apply plugin: 'net.researchgate.release'
 
 android {
     compileSdkVersion 28
