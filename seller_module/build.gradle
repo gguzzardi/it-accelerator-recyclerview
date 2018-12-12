@@ -73,7 +73,6 @@ bintray {
         publish = true
         publicDownloadNumbers = true
         licenses = ['Apache-2.0']
-        licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/gguzzardi/it-accelerator-recyclerview.git'
         version {
             name = '1.0.0-SNAPSHOT'
