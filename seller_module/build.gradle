@@ -61,28 +61,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
-bintray {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_KEY')
-    configurations = ['archives']
-    publications = ['MyPublication']
-    pkg {
-        repo = 'meli-seller-view'
-        name = 'seller-view'
-        publish = true
-        publicDownloadNumbers = true
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/gguzzardi/it-accelerator-recyclerview.git'
-        version {
-            name = '1.0.0-SNAPSHOT'
-            desc = 'Android view displaying seller information by seller id'
-            released  = new Date()
-            vcsTag = '1.0.0'
-            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
-        }
-    }
-}
-
 def pomConfig = {
     licenses {
         license {
@@ -104,23 +82,42 @@ def pomConfig = {
     }
 }
 
-
 publishing {
     publications {
         MyPublication(MavenPublication) {
-            groupId 'com.example.seller_module'
-            artifactId 'gradle-project'
-            version '1.0.0'
+            artifactId 'meli-seller-view'
+            version project.property('version')
             pom.withXml {
                 def root = asNode()
                 root.appendNode('description', 'Display view with seller info by seller id')
-                root.appendNode('name', 'eller View')
-                root.appendNode('url', 'https://github.com/gguzzardi/it-accelerator-recyclerview')
+                root.appendNode('name', 'seller View')
+                root.appendNode('url', 'https://github.com/gguzzardi/it-accelerator-recyclerview.git')
                 root.children().last() + pomConfig
             }
         }
     }
 }
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    configurations = ['archives']
+    publications = ['MyPublication']
+    pkg {
+        repo = 'meli-seller-view'
+        name = 'seller-view'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/gguzzardi/it-accelerator-recyclerview.git'
+        version {
+            name = '1.0.0'
+            desc = 'Android view displaying seller information by seller id'
+            released  = new Date()
+            vcsTag = '1.0.0'
+            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+        }
+    }
+}
+
 
 release {
     failOnCommitNeeded = true
