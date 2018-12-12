@@ -69,7 +69,7 @@ bintray {
     publications = ['MyPublication']
     pkg {
         repo = 'meli-seller-view'
-        name = 'meli-seller-view'
+        name = 'seller-view'
         publish = true
         publicDownloadNumbers = true
         licenses = ['Apache-2.0']
