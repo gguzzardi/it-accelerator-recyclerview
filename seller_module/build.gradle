@@ -109,7 +109,6 @@ def pomConfig = {
 publishing {
     publications {
         MyPublication(MavenPublication) {
-            artifact("$buildDir/outputs/aar/app-release.aar")
             groupId 'com.example.seller_module'
             artifactId 'gradle-project'
             version project.property('version')
