@@ -2,16 +2,22 @@ import java.util.regex.Matcher
 
 plugins {
     id 'net.researchgate.release' version '2.6.0'
+    id "com.jfrog.bintray" version "1.8.1"
 }
 
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+group 'com.example.seller_module'
+version project.property('version')
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0.0-SNAPSHOT"
 
@@ -41,7 +47,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:27.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
     implementation 'com.facebook.fresco:fresco:1.11.0'
@@ -54,6 +60,69 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    configurations = ['archives']
+    publications = ['MyPublication']
+    pkg {
+        repo = 'meli-seller-view'
+        name = 'meli-seller-view'
+        publish = true
+        publicDownloadNumbers = true
+        licenses = ['Apache-2.0']
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/gguzzardi/it-accelerator-recyclerview.git'
+        version {
+            name = '1.0.0-SNAPSHOT'
+            desc = 'Android view displaying seller information by seller id'
+            released  = new Date()
+            vcsTag = '1.0.0'
+            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+        }
+    }
+}
+
+def pomConfig = {
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id "gonzaloguzzardi"
+            name "Gonzalo Guzzardi"
+            email "gonzalo.guzzardi@mercadolibre.com"
+        }
+    }
+
+    scm {
+        url "https://github.com/gguzzardi/it-accelerator-recyclerview"
+    }
+}
+
+
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            artifact("$buildDir/outputs/aar/app-release.aar")
+            groupId 'com.example.seller_module'
+            artifactId 'gradle-project'
+            version project.property('version')
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', 'Display view with seller info by seller id')
+                root.appendNode('name', 'eller View')
+                root.appendNode('url', 'https://github.com/gguzzardi/it-accelerator-recyclerview')
+                root.children().last() + pomConfig
+            }
+        }
+    }
 }
 
 release {
